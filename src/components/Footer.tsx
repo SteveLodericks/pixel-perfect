@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-heading font-bold">CAREER ADVANCEMENT</h3>
+            <img src={logo} alt="Career Advancement Logo" className="h-12 w-auto brightness-0 invert" />
             <p className="text-sm text-primary-foreground/80">
               Empowering professionals to achieve their career goals through
               personalized coaching and guidance.
