@@ -5,8 +5,49 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock } from "lucide-react";
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    EBWidgets: {
+      createWidget: (config: {
+        widgetType: string;
+        eventId: string;
+        modal: boolean;
+        modalTriggerElementId: string;
+        onOrderComplete: () => void;
+      }) => void;
+    };
+  }
+}
 
 const Events = () => {
+  useEffect(() => {
+    // Load Eventbrite widget script
+    const script = document.createElement("script");
+    script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      // Initialize Eventbrite widget
+      if (window.EBWidgets) {
+        window.EBWidgets.createWidget({
+          widgetType: "checkout",
+          eventId: "1975525265248",
+          modal: true,
+          modalTriggerElementId: "eventbrite-widget-modal-trigger-1975525265248",
+          onOrderComplete: () => {
+            console.log("Order complete!");
+          },
+        });
+      }
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   const upcomingEvents = [
     {
       title: "Career Transition Workshop",
@@ -91,6 +132,43 @@ const Events = () => {
           <h2 className="text-4xl font-heading font-bold text-primary mb-12 text-center">
             Upcoming Events
           </h2>
+
+          {/* Featured Eventbrite Event */}
+          <div className="max-w-2xl mx-auto mb-12">
+            <Card className="border-border hover:shadow-lg transition-shadow bg-gradient-to-br from-primary/5 to-secondary/5">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-2">
+                  <Badge className="bg-accent text-accent-foreground">Featured Event</Badge>
+                </div>
+                <CardTitle className="text-2xl font-heading text-primary">
+                  Test Event - Get Your Tickets Now!
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-muted-foreground">
+                  Join us for this exclusive event. Limited seats available!
+                </p>
+                <noscript>
+                  <a
+                    href="https://www.eventbrite.com/e/tickets-test-1975525265248"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="text-secondary hover:underline"
+                  >
+                    Buy Tickets on Eventbrite
+                  </a>
+                </noscript>
+                <Button
+                  id="eventbrite-widget-modal-trigger-1975525265248"
+                  type="button"
+                  className="w-full bg-secondary hover:bg-secondary/90"
+                >
+                  Buy Tickets
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {upcomingEvents.map((event, index) => (
               <Card
