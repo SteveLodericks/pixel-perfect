@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -21,8 +21,27 @@ declare global {
   }
 }
 
+interface EventbriteEvent {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  capacity: string;
+  eventbriteId: string;
+}
+
 const Events = () => {
+  const [eventbriteEvents, setEventbriteEvents] = useState<EventbriteEvent[]>([]);
+
   useEffect(() => {
+    // Load stored Eventbrite events
+    const stored = localStorage.getItem("eventbriteEvents");
+    if (stored) {
+      setEventbriteEvents(JSON.parse(stored));
+    }
+
     // Load Eventbrite widget script
     const script = document.createElement("script");
     script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
@@ -30,22 +49,27 @@ const Events = () => {
     document.body.appendChild(script);
 
     script.onload = () => {
-      // Initialize Eventbrite widget
-      if (window.EBWidgets) {
-        window.EBWidgets.createWidget({
-          widgetType: "checkout",
-          eventId: "1975525265248",
-          modal: true,
-          modalTriggerElementId: "eventbrite-widget-modal-trigger-1975525265248",
-          onOrderComplete: () => {
-            console.log("Order complete!");
-          },
-        });
-      }
+      // Initialize widgets for all Eventbrite events
+      const allEvents = stored ? JSON.parse(stored) : [];
+      allEvents.forEach((event: EventbriteEvent) => {
+        if (window.EBWidgets) {
+          window.EBWidgets.createWidget({
+            widgetType: "checkout",
+            eventId: event.eventbriteId,
+            modal: true,
+            modalTriggerElementId: `eventbrite-widget-modal-trigger-${event.eventbriteId}`,
+            onOrderComplete: () => {
+              console.log("Order complete!");
+            },
+          });
+        }
+      });
     };
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
   const upcomingEvents = [
@@ -133,42 +157,78 @@ const Events = () => {
             Upcoming Events
           </h2>
 
-          {/* Featured Eventbrite Event */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <Card className="border-border hover:shadow-lg transition-shadow bg-gradient-to-br from-primary/5 to-secondary/5">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-accent text-accent-foreground">Featured Event</Badge>
-                </div>
-                <CardTitle className="text-2xl font-heading text-primary">
-                  Test Event - Get Your Tickets Now!
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  Join us for this exclusive event. Limited seats available!
-                </p>
-                <noscript>
-                  <a
-                    href="https://www.eventbrite.com/e/tickets-test-1975525265248"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="text-secondary hover:underline"
+          {/* Eventbrite Events from CMS */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-6">
+            {eventbriteEvents.map((event) => (
+              <Card
+                key={event.id}
+                className="border-border hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className="bg-accent text-accent-foreground">
+                      Eventbrite
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-xl font-heading text-primary">
+                    {event.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {event.description && (
+                    <p className="text-muted-foreground text-sm">
+                      {event.description}
+                    </p>
+                  )}
+                  <div className="space-y-2 text-sm">
+                    {event.date && (
+                      <div className="flex items-center space-x-2 text-foreground">
+                        <Calendar className="h-4 w-4 text-secondary" />
+                        <span>{event.date}</span>
+                      </div>
+                    )}
+                    {event.time && (
+                      <div className="flex items-center space-x-2 text-foreground">
+                        <Clock className="h-4 w-4 text-secondary" />
+                        <span>{event.time}</span>
+                      </div>
+                    )}
+                    {event.location && (
+                      <div className="flex items-center space-x-2 text-foreground">
+                        <MapPin className="h-4 w-4 text-secondary" />
+                        <span>{event.location}</span>
+                      </div>
+                    )}
+                    {event.capacity && (
+                      <div className="flex items-center space-x-2 text-foreground">
+                        <Users className="h-4 w-4 text-secondary" />
+                        <span>{event.capacity}</span>
+                      </div>
+                    )}
+                  </div>
+                  <noscript>
+                    <a
+                      href={`https://www.eventbrite.com/e/tickets-${event.eventbriteId}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      className="text-secondary hover:underline text-sm"
+                    >
+                      Buy Tickets on Eventbrite
+                    </a>
+                  </noscript>
+                  <Button
+                    id={`eventbrite-widget-modal-trigger-${event.eventbriteId}`}
+                    type="button"
+                    className="w-full bg-secondary hover:bg-secondary/90"
                   >
-                    Buy Tickets on Eventbrite
-                  </a>
-                </noscript>
-                <Button
-                  id="eventbrite-widget-modal-trigger-1975525265248"
-                  type="button"
-                  className="w-full bg-secondary hover:bg-secondary/90"
-                >
-                  Buy Tickets
-                </Button>
-              </CardContent>
-            </Card>
+                    Buy Tickets
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
+          {/* Static Upcoming Events */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {upcomingEvents.map((event, index) => (
               <Card
