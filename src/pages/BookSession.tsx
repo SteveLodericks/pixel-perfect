@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Clock, Video } from "lucide-react";
 
 const BookSession = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -85,33 +96,12 @@ const BookSession = () => {
                     a confirmation email with the meeting details.
                   </p>
 
-                  {/* Placeholder for Calendly Widget */}
-                  <div className="bg-muted rounded-lg p-12 min-h-[600px] flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <Calendar className="h-20 w-20 text-secondary mx-auto" />
-                      <p className="text-lg font-medium text-foreground">
-                        Calendly Integration
-                      </p>
-                      <p className="text-sm text-muted-foreground max-w-md">
-                        To complete the booking integration, add your Calendly
-                        widget embed code here. Visit{" "}
-                        <a
-                          href="https://calendly.com"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-secondary hover:underline"
-                        >
-                          calendly.com
-                        </a>{" "}
-                        to set up your account and get your embed code.
-                      </p>
-                      <div className="pt-4">
-                        <code className="bg-card px-4 py-2 rounded text-xs">
-                          {`<!-- Calendly inline widget begin -->`}
-                        </code>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Calendly Widget */}
+                  <div 
+                    className="calendly-inline-widget" 
+                    data-url="https://calendly.com/stevelodericks/30min" 
+                    style={{ minWidth: "320px", height: "700px" }}
+                  />
 
                   <p className="text-sm text-muted-foreground pt-4">
                     Available slots: Saturday/Sunday, 1:00 PM - 6:00 PM (Central
