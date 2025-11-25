@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Heart } from "lucide-react";
 import aboutImage from "@/assets/about-team.jpg";
@@ -8,6 +9,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <ScrollToTop />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-background to-muted">
