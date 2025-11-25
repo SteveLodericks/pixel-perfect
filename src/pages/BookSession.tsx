@@ -116,44 +116,6 @@ const BookSession = () => {
         </div>
       </section>
 
-      {/* What to Expect */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-heading font-bold text-primary text-center mb-8">
-              What to Expect in Your Session
-            </h2>
-            <div className="space-y-6">
-              <Card className="border-border">
-                <CardContent className="p-6">
-                  <h4 className="text-lg font-heading font-semibold text-primary mb-2">
-                    Free Discovery Call (30 minutes)
-                  </h4>
-                  <p className="text-muted-foreground">
-                    We'll discuss your career goals, current challenges, and how
-                    our coaching services can help you achieve your objectives.
-                    This is a no-commitment conversation to see if we're a good
-                    fit.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="border-border">
-                <CardContent className="p-6">
-                  <h4 className="text-lg font-heading font-semibold text-primary mb-2">
-                    Full Coaching Session (45-60 minutes)
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Deep-dive into your specific needs with actionable strategies,
-                    personalized advice, and a clear action plan. You'll leave
-                    with concrete next steps and renewed confidence.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
