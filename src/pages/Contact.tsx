@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <ScrollToTop />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-background to-muted">
