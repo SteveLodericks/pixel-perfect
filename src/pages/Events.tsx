@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { parse, isPast } from "date-fns";
 
 declare global {
   interface Window {
@@ -72,7 +73,19 @@ const Events = () => {
       }
     };
   }, []);
-  const upcomingEvents = [
+
+  const parseEventDateTime = (dateStr: string, timeStr: string) => {
+    try {
+      // Extract just the start time (before the dash)
+      const startTime = timeStr.split('-')[0].trim();
+      const dateTimeStr = `${dateStr} ${startTime}`;
+      return parse(dateTimeStr, "MMMM d, yyyy h:mm a", new Date());
+    } catch {
+      return new Date();
+    }
+  };
+
+  const allStaticEvents = [
     {
       title: "Career Transition Workshop",
       date: "December 15, 2025",
@@ -105,29 +118,43 @@ const Events = () => {
     },
   ];
 
-  const pastEvents = [
-    {
-      title: "Interview Skills Workshop",
-      date: "November 5, 2025",
-      attendees: "45 participants",
-      description:
-        "Interactive workshop covering behavioral interview techniques and common questions.",
-    },
-    {
-      title: "LinkedIn Optimization Seminar",
-      date: "October 20, 2025",
-      attendees: "60 participants",
-      description:
-        "Learn how to optimize your LinkedIn profile to attract recruiters and opportunities.",
-    },
-    {
-      title: "Career Growth Summit",
-      date: "September 15, 2025",
-      attendees: "100 participants",
-      description:
-        "Full-day event featuring industry leaders sharing insights on career advancement strategies.",
-    },
-  ];
+  const { upcomingEvents, pastEvents } = useMemo(() => {
+    const now = new Date();
+    const upcoming: typeof allStaticEvents = [];
+    const past: Array<{ title: string; date: string; attendees?: string; description: string; time?: string; location?: string; capacity?: string; type?: string }> = [];
+
+    // Categorize static events
+    allStaticEvents.forEach((event) => {
+      const eventDateTime = parseEventDateTime(event.date, event.time);
+      if (isPast(eventDateTime)) {
+        past.push({
+          ...event,
+          attendees: event.capacity // Use capacity as attendees for past events
+        });
+      } else {
+        upcoming.push(event);
+      }
+    });
+
+    return { upcomingEvents: upcoming, pastEvents: past };
+  }, []);
+
+  const { upcomingEventbriteEvents, pastEventbriteEvents } = useMemo(() => {
+    const now = new Date();
+    const upcoming: EventbriteEvent[] = [];
+    const past: EventbriteEvent[] = [];
+
+    eventbriteEvents.forEach((event) => {
+      const eventDateTime = parseEventDateTime(event.date, event.time);
+      if (isPast(eventDateTime)) {
+        past.push(event);
+      } else {
+        upcoming.push(event);
+      }
+    });
+
+    return { upcomingEventbriteEvents: upcoming, pastEventbriteEvents: past };
+  }, [eventbriteEvents]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -159,7 +186,7 @@ const Events = () => {
 
           {/* Eventbrite Events from CMS */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-6">
-            {eventbriteEvents.map((event) => (
+            {upcomingEventbriteEvents.map((event) => (
               <Card
                 key={event.id}
                 className="border-border hover:shadow-lg transition-shadow"
@@ -282,6 +309,40 @@ const Events = () => {
             Past Events
           </h2>
           <div className="max-w-4xl mx-auto space-y-6">
+            {/* Past Eventbrite Events */}
+            {pastEventbriteEvents.map((event) => (
+              <Card key={event.id} className="border-border">
+                <CardContent className="p-6">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="space-y-2 flex-1">
+                      <h3 className="text-xl font-heading font-semibold text-primary">
+                        {event.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        {event.description}
+                      </p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <div className="flex items-center space-x-1 text-foreground">
+                          <Calendar className="h-4 w-4 text-secondary" />
+                          <span>{event.date}</span>
+                        </div>
+                        {event.capacity && (
+                          <div className="flex items-center space-x-1 text-foreground">
+                            <Users className="h-4 w-4 text-secondary" />
+                            <span>{event.capacity}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <Badge variant="outline" className="w-fit">
+                      Completed
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
+            {/* Past Static Events */}
             {pastEvents.map((event, index) => (
               <Card key={index} className="border-border">
                 <CardContent className="p-6">
@@ -298,10 +359,12 @@ const Events = () => {
                           <Calendar className="h-4 w-4 text-secondary" />
                           <span>{event.date}</span>
                         </div>
-                        <div className="flex items-center space-x-1 text-foreground">
-                          <Users className="h-4 w-4 text-secondary" />
-                          <span>{event.attendees}</span>
-                        </div>
+                        {event.attendees && (
+                          <div className="flex items-center space-x-1 text-foreground">
+                            <Users className="h-4 w-4 text-secondary" />
+                            <span>{event.attendees}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                     <Badge variant="outline" className="w-fit">
