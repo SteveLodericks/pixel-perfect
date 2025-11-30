@@ -1,12 +1,22 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, LogOut, LogIn, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
 import logo from "@/assets/logo.jpg";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const { isAdmin } = useAdminCheck();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -40,11 +50,39 @@ const Navigation = () => {
                 {link.name}
               </Link>
             ))}
+            {isAdmin && (
+              <Link
+                to="/admin/events"
+                className={`text-sm font-medium transition-colors hover:text-primary flex items-center gap-1 ${
+                  isActive("/admin/events") ? "text-primary" : "text-foreground/70"
+                }`}
+              >
+                <Shield className="h-4 w-4" />
+                Admin
+              </Link>
+            )}
             <Link to="/book">
               <Button className="bg-secondary hover:bg-secondary/90">
                 Book a Session
               </Button>
             </Link>
+            {user ? (
+              <Button 
+                variant="outline" 
+                onClick={handleSignOut}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <LogIn className="h-4 w-4" />
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -73,11 +111,43 @@ const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
+              {isAdmin && (
+                <Link
+                  to="/admin/events"
+                  onClick={() => setIsOpen(false)}
+                  className={`text-sm font-medium transition-colors hover:text-primary flex items-center gap-1 ${
+                    isActive("/admin/events") ? "text-primary" : "text-foreground/70"
+                  }`}
+                >
+                  <Shield className="h-4 w-4" />
+                  Admin
+                </Link>
+              )}
               <Link to="/book" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-secondary hover:bg-secondary/90">
                   Book a Session
                 </Button>
               </Link>
+              {user ? (
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    handleSignOut();
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center gap-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </Button>
+              ) : (
+                <Link to="/auth" onClick={() => setIsOpen(false)}>
+                  <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         )}

@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
-import { Trash2 } from "lucide-react";
+import { Trash2, Loader2, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
 
 interface EventbriteEvent {
   id: string;
@@ -22,6 +24,8 @@ interface EventbriteEvent {
 
 const AdminEvents = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { isAdmin, loading: adminLoading } = useAdminCheck();
   const [events, setEvents] = useState<EventbriteEvent[]>([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -32,6 +36,18 @@ const AdminEvents = () => {
     capacity: "",
     eventbriteId: "",
   });
+
+  // Redirect if not admin
+  useEffect(() => {
+    if (!adminLoading && !isAdmin) {
+      toast({
+        title: "Access Denied",
+        description: "You must be an admin to access this page",
+        variant: "destructive",
+      });
+      navigate("/");
+    }
+  }, [isAdmin, adminLoading, navigate, toast]);
 
   useEffect(() => {
     const stored = localStorage.getItem("eventbriteEvents");
@@ -90,9 +106,40 @@ const AdminEvents = () => {
     });
   };
 
+  // Show loading state
+  if (adminLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center space-y-4">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+            <p className="text-muted-foreground">Verifying admin access...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Don't render admin content if not admin (will redirect anyway)
+  if (!isAdmin) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+
+      {/* Admin Badge */}
+      <div className="bg-primary/10 border-b border-primary/20">
+        <div className="container mx-auto px-4 py-2">
+          <div className="flex items-center gap-2 text-sm text-primary">
+            <Shield className="h-4 w-4" />
+            <span className="font-medium">Admin Mode</span>
+          </div>
+        </div>
+      </div>
 
       <section className="pt-32 pb-20">
         <div className="container mx-auto px-4">
