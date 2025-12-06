@@ -14,7 +14,7 @@ import {
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
-import heroImage from "@/assets/hero-team.jpg";
+import heroImage from "@/assets/hero-home.jpeg";
 
 const Index = () => {
   const services = [
