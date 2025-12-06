@@ -95,7 +95,7 @@ const Index = () => {
               </div>
             </div>
             <div className="relative animate-fade-in-delayed">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <div className="rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
                 <img
                   src={heroImage}
                   alt="Professional career coaching session"
