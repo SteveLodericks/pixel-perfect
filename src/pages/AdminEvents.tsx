@@ -10,23 +10,26 @@ import { Trash2, Loader2, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
+import { supabase } from "@/integrations/supabase/client";
 
-interface EventbriteEvent {
+interface Event {
   id: string;
   title: string;
-  description: string;
-  date: string;
-  time: string;
-  location: string;
-  capacity: string;
-  eventbriteId: string;
+  description: string | null;
+  date: string | null;
+  time: string | null;
+  location: string | null;
+  capacity: string | null;
+  eventbrite_id: string;
 }
 
 const AdminEvents = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { isAdmin, loading: adminLoading } = useAdminCheck();
-  const [events, setEvents] = useState<EventbriteEvent[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -49,19 +52,38 @@ const AdminEvents = () => {
     }
   }, [isAdmin, adminLoading, navigate, toast]);
 
+  // Fetch events from database
   useEffect(() => {
-    const stored = localStorage.getItem("eventbriteEvents");
-    if (stored) {
-      setEvents(JSON.parse(stored));
+    const fetchEvents = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("events")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Error fetching events:", error);
+          toast({
+            title: "Error loading events",
+            description: "Could not load events from the database",
+            variant: "destructive",
+          });
+        } else {
+          setEvents(data || []);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (isAdmin) {
+      fetchEvents();
     }
-  }, []);
+  }, [isAdmin, toast]);
 
-  const saveEvents = (newEvents: EventbriteEvent[]) => {
-    localStorage.setItem("eventbriteEvents", JSON.stringify(newEvents));
-    setEvents(newEvents);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.title || !formData.eventbriteId) {
@@ -73,37 +95,87 @@ const AdminEvents = () => {
       return;
     }
 
-    const newEvent: EventbriteEvent = {
-      id: Date.now().toString(),
-      ...formData,
-    };
+    setIsSubmitting(true);
 
-    const updatedEvents = [...events, newEvent];
-    saveEvents(updatedEvents);
+    try {
+      const { data, error } = await supabase
+        .from("events")
+        .insert({
+          title: formData.title,
+          description: formData.description || null,
+          date: formData.date || null,
+          time: formData.time || null,
+          location: formData.location || null,
+          capacity: formData.capacity || null,
+          eventbrite_id: formData.eventbriteId,
+        })
+        .select()
+        .single();
 
-    toast({
-      title: "Event added successfully",
-      description: "Your Eventbrite event has been added to the events page",
-    });
-
-    setFormData({
-      title: "",
-      description: "",
-      date: "",
-      time: "",
-      location: "",
-      capacity: "",
-      eventbriteId: "",
-    });
+      if (error) {
+        console.error("Error creating event:", error);
+        toast({
+          title: "Error creating event",
+          description: "Could not save the event. Make sure you have admin permissions.",
+          variant: "destructive",
+        });
+      } else {
+        setEvents([data, ...events]);
+        toast({
+          title: "Event added successfully",
+          description: "Your Eventbrite event has been added to the events page",
+        });
+        setFormData({
+          title: "",
+          description: "",
+          date: "",
+          time: "",
+          location: "",
+          capacity: "",
+          eventbriteId: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error creating event:", error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleDelete = (id: string) => {
-    const updatedEvents = events.filter((event) => event.id !== id);
-    saveEvents(updatedEvents);
-    toast({
-      title: "Event deleted",
-      description: "The event has been removed",
-    });
+  const handleDelete = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("events")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        console.error("Error deleting event:", error);
+        toast({
+          title: "Error deleting event",
+          description: "Could not delete the event. Make sure you have admin permissions.",
+          variant: "destructive",
+        });
+      } else {
+        setEvents(events.filter((event) => event.id !== id));
+        toast({
+          title: "Event deleted",
+          description: "The event has been removed",
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    }
   };
 
   // Show loading state
@@ -247,8 +319,15 @@ const AdminEvents = () => {
                     </p>
                   </div>
 
-                  <Button type="submit" className="w-full">
-                    Add Event
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                        Adding Event...
+                      </>
+                    ) : (
+                      "Add Event"
+                    )}
                   </Button>
                 </form>
               </CardContent>
@@ -259,7 +338,11 @@ const AdminEvents = () => {
               <h2 className="text-2xl font-heading font-bold text-primary">
                 Existing Events
               </h2>
-              {events.length === 0 ? (
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                </div>
+              ) : events.length === 0 ? (
                 <p className="text-muted-foreground">No events added yet.</p>
               ) : (
                 events.map((event) => (
@@ -300,7 +383,7 @@ const AdminEvents = () => {
                             )}
                             <p className="text-foreground">
                               <span className="font-medium">Event ID:</span>{" "}
-                              {event.eventbriteId}
+                              {event.eventbrite_id}
                             </p>
                           </div>
                         </div>
