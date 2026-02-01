@@ -106,6 +106,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      email_exists_in_profiles: { Args: { _email: string }; Returns: boolean }
       get_public_events: {
         Args: never
         Returns: {

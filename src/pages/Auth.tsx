@@ -87,6 +87,33 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      // First check if the email exists in our profiles table
+      const { data: emailExists, error: checkError } = await supabase.rpc(
+        'email_exists_in_profiles',
+        { _email: resetEmail }
+      );
+
+      if (checkError) {
+        toast({
+          title: "Error",
+          description: "Unable to verify email. Please try again.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (!emailExists) {
+        toast({
+          title: "Email not found",
+          description: "This email is not registered in our system.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      // Email exists, proceed with password reset
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
         redirectTo: `${window.location.origin}/auth`,
       });
@@ -134,10 +161,12 @@ const Auth = () => {
       } else {
         toast({
           title: "Success",
-          description: "Password updated successfully!",
+          description: "Password updated successfully! You are now logged in.",
         });
         setIsResettingPassword(false);
         setNewPassword("");
+        // User is already authenticated after password update, redirect to home
+        navigate("/");
       }
     } catch (error) {
       toast({
