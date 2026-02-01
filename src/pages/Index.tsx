@@ -74,7 +74,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-5xl md:text-6xl font-heading font-bold text-primary leading-tight">
-                Advance Your Career With Confidence
+                Advance Your Career With Us
               </h1>
               <p className="text-xl text-muted-foreground">
                 Professional career coaching to help you unlock your potential,
