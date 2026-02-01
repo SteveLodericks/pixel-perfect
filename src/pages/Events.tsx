@@ -23,29 +23,26 @@ declare global {
   }
 }
 
-interface Event {
+interface PublicEvent {
   id: string;
   title: string;
   description: string | null;
-  date: string | null;
-  time: string | null;
+  event_date: string | null;
+  event_time: string | null;
   location: string | null;
   capacity: string | null;
   eventbrite_id: string;
 }
 
 const Events = () => {
-  const [eventbriteEvents, setEventbriteEvents] = useState<Event[]>([]);
+  const [eventbriteEvents, setEventbriteEvents] = useState<PublicEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch events from database
+    // Fetch events using secure function (excludes created_by for privacy)
     const fetchEvents = async () => {
       try {
-        const { data, error } = await supabase
-          .from("events")
-          .select("*")
-          .order("created_at", { ascending: false });
+        const { data, error } = await supabase.rpc("get_public_events");
 
         if (error) {
           if (import.meta.env.DEV) {
@@ -163,11 +160,11 @@ const Events = () => {
   }, []);
 
   const { upcomingEventbriteEvents, pastEventbriteEvents } = useMemo(() => {
-    const upcoming: Event[] = [];
-    const past: Event[] = [];
+    const upcoming: PublicEvent[] = [];
+    const past: PublicEvent[] = [];
 
     eventbriteEvents.forEach((event) => {
-      const eventDateTime = parseEventDateTime(event.date, event.time);
+      const eventDateTime = parseEventDateTime(event.event_date, event.event_time);
       if (isPast(eventDateTime)) {
         past.push(event);
       } else {
@@ -230,16 +227,16 @@ const Events = () => {
                     </p>
                   )}
                   <div className="space-y-2 text-sm">
-                    {event.date && (
+                    {event.event_date && (
                       <div className="flex items-center space-x-2 text-foreground">
                         <Calendar className="h-4 w-4 text-secondary" />
-                        <span>{event.date}</span>
+                        <span>{event.event_date}</span>
                       </div>
                     )}
-                    {event.time && (
+                    {event.event_time && (
                       <div className="flex items-center space-x-2 text-foreground">
                         <Clock className="h-4 w-4 text-secondary" />
-                        <span>{event.time}</span>
+                        <span>{event.event_time}</span>
                       </div>
                     )}
                     {event.location && (
@@ -346,7 +343,7 @@ const Events = () => {
                       <div className="flex items-center space-x-4 text-sm">
                         <div className="flex items-center space-x-1 text-foreground">
                           <Calendar className="h-4 w-4 text-secondary" />
-                          <span>{event.date}</span>
+                          <span>{event.event_date}</span>
                         </div>
                         {event.capacity && (
                           <div className="flex items-center space-x-1 text-foreground">

@@ -106,6 +106,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_events: {
+        Args: never
+        Returns: {
+          capacity: string
+          created_at: string
+          description: string
+          event_date: string
+          event_time: string
+          eventbrite_id: string
+          id: string
+          location: string
+          title: string
+          updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
