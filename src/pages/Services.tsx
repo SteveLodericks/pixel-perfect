@@ -18,45 +18,6 @@ import {
 const Services = () => {
   const services = [
     {
-      icon: FileText,
-      title: "CV Writing",
-      description:
-        "Get a professionally crafted CV that stands out to employers and showcases your unique value proposition.",
-      features: [
-        "ATS-optimized formatting",
-        "Achievement-focused content",
-        "Industry-specific keywords",
-        "Unlimited revisions",
-      ],
-      duration: "3-5 business days",
-    },
-    {
-      icon: MessageSquare,
-      title: "Cover Letters",
-      description:
-        "Compelling, customized cover letters that capture attention and demonstrate your fit for the role.",
-      features: [
-        "Tailored to specific positions",
-        "Highlights key qualifications",
-        "Professional tone and structure",
-        "Quick turnaround time",
-      ],
-      duration: "2-3 business days",
-    },
-    {
-      icon: Video,
-      title: "Mock Interviews",
-      description:
-        "Practice makes perfect. Build confidence with realistic interview simulations and expert feedback.",
-      features: [
-        "Common and behavioral questions",
-        "Detailed performance feedback",
-        "Body language coaching",
-        "Industry-specific scenarios",
-      ],
-      duration: "60-minute sessions",
-    },
-    {
       icon: Users,
       title: "One-on-One Career Coaching",
       description:
@@ -94,6 +55,45 @@ const Services = () => {
         "Long-term strategy development",
       ],
       duration: "Multiple sessions",
+    },
+    {
+      icon: FileText,
+      title: "CV Writing",
+      description:
+        "Get a professionally crafted CV that stands out to employers and showcases your unique value proposition.",
+      features: [
+        "ATS-optimized formatting",
+        "Achievement-focused content",
+        "Industry-specific keywords",
+        "Unlimited revisions",
+      ],
+      duration: "3-5 business days",
+    },
+    {
+      icon: MessageSquare,
+      title: "Cover Letters",
+      description:
+        "Compelling, customized cover letters that capture attention and demonstrate your fit for the role.",
+      features: [
+        "Tailored to specific positions",
+        "Highlights key qualifications",
+        "Professional tone and structure",
+        "Quick turnaround time",
+      ],
+      duration: "2-3 business days",
+    },
+    {
+      icon: Video,
+      title: "Mock Interviews",
+      description:
+        "Practice makes perfect. Build confidence with realistic interview simulations and expert feedback.",
+      features: [
+        "Common and behavioral questions",
+        "Detailed performance feedback",
+        "Body language coaching",
+        "Industry-specific scenarios",
+      ],
+      duration: "60-minute sessions",
     },
   ];
 
