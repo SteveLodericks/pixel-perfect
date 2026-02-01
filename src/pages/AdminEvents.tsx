@@ -62,7 +62,9 @@ const AdminEvents = () => {
           .order("created_at", { ascending: false });
 
         if (error) {
-          console.error("Error fetching events:", error);
+          if (import.meta.env.DEV) {
+            console.error("Error fetching events:", error);
+          }
           toast({
             title: "Error loading events",
             description: "Could not load events from the database",
@@ -72,7 +74,9 @@ const AdminEvents = () => {
           setEvents(data || []);
         }
       } catch (error) {
-        console.error("Error fetching events:", error);
+        if (import.meta.env.DEV) {
+          console.error("Error fetching events:", error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -113,7 +117,9 @@ const AdminEvents = () => {
         .single();
 
       if (error) {
-        console.error("Error creating event:", error);
+        if (import.meta.env.DEV) {
+          console.error("Error creating event:", error);
+        }
         toast({
           title: "Error creating event",
           description: "Could not save the event. Make sure you have admin permissions.",
@@ -136,7 +142,9 @@ const AdminEvents = () => {
         });
       }
     } catch (error) {
-      console.error("Error creating event:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error creating event:", error);
+      }
       toast({
         title: "Error",
         description: "An unexpected error occurred",
@@ -155,7 +163,9 @@ const AdminEvents = () => {
         .eq("id", id);
 
       if (error) {
-        console.error("Error deleting event:", error);
+        if (import.meta.env.DEV) {
+          console.error("Error deleting event:", error);
+        }
         toast({
           title: "Error deleting event",
           description: "Could not delete the event. Make sure you have admin permissions.",
@@ -169,7 +179,9 @@ const AdminEvents = () => {
         });
       }
     } catch (error) {
-      console.error("Error deleting event:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error deleting event:", error);
+      }
       toast({
         title: "Error",
         description: "An unexpected error occurred",

@@ -48,12 +48,16 @@ const Events = () => {
           .order("created_at", { ascending: false });
 
         if (error) {
-          console.error("Error fetching events:", error);
+          if (import.meta.env.DEV) {
+            console.error("Error fetching events:", error);
+          }
         } else {
           setEventbriteEvents(data || []);
         }
       } catch (error) {
-        console.error("Error fetching events:", error);
+        if (import.meta.env.DEV) {
+          console.error("Error fetching events:", error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -61,10 +65,12 @@ const Events = () => {
 
     fetchEvents();
 
-    // Load Eventbrite widget script
+    // Load Eventbrite widget script with security attributes
     const script = document.createElement("script");
     script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
     script.async = true;
+    script.crossOrigin = "anonymous";
+    script.referrerPolicy = "no-referrer";
     document.body.appendChild(script);
 
     return () => {
