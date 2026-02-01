@@ -67,7 +67,7 @@ const Footer = () => {
                 <span>+27 123 456 789</span>
               </div>
               <div className="flex space-x-4 pt-2">
-                <a href="#" className="hover:text-secondary transition-colors">
+                <a href="https://www.instagram.com/_careeradvancement?igsh=ZDFuemg0c3Jlemt4" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a href="#" className="hover:text-secondary transition-colors">
