@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { parse, isPast } from "date-fns";
+import { supabase } from "@/integrations/supabase/client";
 
 declare global {
   interface Window {
@@ -22,50 +23,49 @@ declare global {
   }
 }
 
-interface EventbriteEvent {
+interface Event {
   id: string;
   title: string;
-  description: string;
-  date: string;
-  time: string;
-  location: string;
-  capacity: string;
-  eventbriteId: string;
+  description: string | null;
+  date: string | null;
+  time: string | null;
+  location: string | null;
+  capacity: string | null;
+  eventbrite_id: string;
 }
 
 const Events = () => {
-  const [eventbriteEvents, setEventbriteEvents] = useState<EventbriteEvent[]>([]);
+  const [eventbriteEvents, setEventbriteEvents] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Load stored Eventbrite events
-    const stored = localStorage.getItem("eventbriteEvents");
-    if (stored) {
-      setEventbriteEvents(JSON.parse(stored));
-    }
+    // Fetch events from database
+    const fetchEvents = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("events")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Error fetching events:", error);
+        } else {
+          setEventbriteEvents(data || []);
+        }
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
 
     // Load Eventbrite widget script
     const script = document.createElement("script");
     script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
     script.async = true;
     document.body.appendChild(script);
-
-    script.onload = () => {
-      // Initialize widgets for all Eventbrite events
-      const allEvents = stored ? JSON.parse(stored) : [];
-      allEvents.forEach((event: EventbriteEvent) => {
-        if (window.EBWidgets) {
-          window.EBWidgets.createWidget({
-            widgetType: "checkout",
-            eventId: event.eventbriteId,
-            modal: true,
-            modalTriggerElementId: `eventbrite-widget-modal-trigger-${event.eventbriteId}`,
-            onOrderComplete: () => {
-              console.log("Order complete!");
-            },
-          });
-        }
-      });
-    };
 
     return () => {
       if (document.body.contains(script)) {
@@ -74,8 +74,26 @@ const Events = () => {
     };
   }, []);
 
-  const parseEventDateTime = (dateStr: string, timeStr: string) => {
+  // Initialize Eventbrite widgets when events are loaded
+  useEffect(() => {
+    if (eventbriteEvents.length > 0 && window.EBWidgets) {
+      eventbriteEvents.forEach((event) => {
+        window.EBWidgets.createWidget({
+          widgetType: "checkout",
+          eventId: event.eventbrite_id,
+          modal: true,
+          modalTriggerElementId: `eventbrite-widget-modal-trigger-${event.eventbrite_id}`,
+          onOrderComplete: () => {
+            console.log("Order complete!");
+          },
+        });
+      });
+    }
+  }, [eventbriteEvents]);
+
+  const parseEventDateTime = (dateStr: string | null, timeStr: string | null) => {
     try {
+      if (!dateStr || !timeStr) return new Date();
       // Extract just the start time (before the dash)
       const startTime = timeStr.split('-')[0].trim();
       const dateTimeStr = `${dateStr} ${startTime}`;
@@ -119,7 +137,6 @@ const Events = () => {
   ];
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
-    const now = new Date();
     const upcoming: typeof allStaticEvents = [];
     const past: Array<{ title: string; date: string; attendees?: string; description: string; time?: string; location?: string; capacity?: string; type?: string }> = [];
 
@@ -140,9 +157,8 @@ const Events = () => {
   }, []);
 
   const { upcomingEventbriteEvents, pastEventbriteEvents } = useMemo(() => {
-    const now = new Date();
-    const upcoming: EventbriteEvent[] = [];
-    const past: EventbriteEvent[] = [];
+    const upcoming: Event[] = [];
+    const past: Event[] = [];
 
     eventbriteEvents.forEach((event) => {
       const eventDateTime = parseEventDateTime(event.date, event.time);
@@ -184,7 +200,7 @@ const Events = () => {
             Upcoming Events
           </h2>
 
-          {/* Eventbrite Events from CMS */}
+          {/* Eventbrite Events from Database */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-6">
             {upcomingEventbriteEvents.map((event) => (
               <Card
@@ -235,7 +251,7 @@ const Events = () => {
                   </div>
                   <noscript>
                     <a
-                      href={`https://www.eventbrite.com/e/tickets-${event.eventbriteId}`}
+                      href={`https://www.eventbrite.com/e/tickets-${event.eventbrite_id}`}
                       rel="noopener noreferrer"
                       target="_blank"
                       className="text-secondary hover:underline text-sm"
@@ -244,7 +260,7 @@ const Events = () => {
                     </a>
                   </noscript>
                   <Button
-                    id={`eventbrite-widget-modal-trigger-${event.eventbriteId}`}
+                    id={`eventbrite-widget-modal-trigger-${event.eventbrite_id}`}
                     type="button"
                     className="w-full bg-secondary hover:bg-secondary/90"
                   >

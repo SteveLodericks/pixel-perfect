@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      events: {
+        Row: {
+          capacity: string | null
+          created_at: string
+          created_by: string | null
+          date: string | null
+          description: string | null
+          eventbrite_id: string
+          id: string
+          location: string | null
+          time: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: string | null
+          created_at?: string
+          created_by?: string | null
+          date?: string | null
+          description?: string | null
+          eventbrite_id: string
+          id?: string
+          location?: string | null
+          time?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: string | null
+          created_at?: string
+          created_by?: string | null
+          date?: string | null
+          description?: string | null
+          eventbrite_id?: string
+          id?: string
+          location?: string | null
+          time?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
