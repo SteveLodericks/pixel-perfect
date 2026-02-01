@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -67,9 +67,6 @@ const Footer = () => {
                 <span>+27 123 456 789</span>
               </div>
               <div className="flex space-x-4 pt-2">
-                <a href="#" className="hover:text-secondary transition-colors">
-                  <Facebook className="h-5 w-5" />
-                </a>
                 <a href="#" className="hover:text-secondary transition-colors">
                   <Instagram className="h-5 w-5" />
                 </a>
