@@ -19,24 +19,6 @@ import heroImage from "@/assets/hero-home.jpeg";
 const Index = () => {
   const services = [
     {
-      icon: FileText,
-      title: "CV Writing",
-      description:
-        "Professional CV crafting that highlights your strengths and achievements",
-    },
-    {
-      icon: MessageSquare,
-      title: "Cover Letters",
-      description:
-        "Compelling cover letters tailored to your target positions",
-    },
-    {
-      icon: Video,
-      title: "Mock Interviews",
-      description:
-        "Practice sessions with feedback to boost your interview confidence",
-    },
-    {
       icon: Users,
       title: "One-on-One Coaching",
       description:
@@ -53,6 +35,24 @@ const Index = () => {
       title: "Career Counselling",
       description:
         "Strategic planning and advice for long-term career success",
+    },
+    {
+      icon: FileText,
+      title: "CV Writing",
+      description:
+        "Professional CV crafting that highlights your strengths and achievements",
+    },
+    {
+      icon: MessageSquare,
+      title: "Cover Letters",
+      description:
+        "Compelling cover letters tailored to your target positions",
+    },
+    {
+      icon: Video,
+      title: "Mock Interviews",
+      description:
+        "Practice sessions with feedback to boost your interview confidence",
     },
   ];
 
