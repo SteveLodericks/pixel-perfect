@@ -101,7 +101,7 @@ const BookSession = () => {
                   {/* Calendly Widget */}
                   <div 
                     className="calendly-inline-widget" 
-                    data-url="https://calendly.com/septembernosivuno/30min" 
+                    data-url="https://calendly.com/septembernosivuno" 
                     style={{ minWidth: "320px", height: "700px" }}
                   />
 
