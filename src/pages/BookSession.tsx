@@ -7,13 +7,18 @@ import { Calendar, Clock, Video } from "lucide-react";
 
 const BookSession = () => {
   useEffect(() => {
+    // Load Calendly widget script with security attributes
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
+    script.crossOrigin = "anonymous";
+    script.referrerPolicy = "no-referrer";
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
   return (
