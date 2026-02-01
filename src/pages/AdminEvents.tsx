@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
 import { supabase } from "@/integrations/supabase/client";
+import { validateEventForm, type EventFormData } from "@/lib/eventValidation";
 
 interface Event {
   id: string;
@@ -90,10 +91,23 @@ const AdminEvents = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.title || !formData.eventbriteId) {
+    // Validate form data using zod schema
+    const formDataToValidate: EventFormData = {
+      title: formData.title,
+      description: formData.description,
+      date: formData.date,
+      time: formData.time,
+      location: formData.location,
+      capacity: formData.capacity,
+      eventbriteId: formData.eventbriteId,
+    };
+
+    const validation = validateEventForm(formDataToValidate);
+    
+    if (!validation.success) {
       toast({
-        title: "Missing required fields",
-        description: "Please fill in title and Eventbrite Event ID",
+        title: "Validation Error",
+        description: validation.errors?.join(", ") || "Please check your input",
         variant: "destructive",
       });
       return;
@@ -102,16 +116,18 @@ const AdminEvents = () => {
     setIsSubmitting(true);
 
     try {
+      // Use validated data for insertion
+      const validatedData = validation.data!;
       const { data, error } = await supabase
         .from("events")
         .insert({
-          title: formData.title,
-          description: formData.description || null,
-          date: formData.date || null,
-          time: formData.time || null,
-          location: formData.location || null,
-          capacity: formData.capacity || null,
-          eventbrite_id: formData.eventbriteId,
+          title: validatedData.title,
+          description: validatedData.description || null,
+          date: validatedData.date || null,
+          time: validatedData.time || null,
+          location: validatedData.location || null,
+          capacity: validatedData.capacity || null,
+          eventbrite_id: validatedData.eventbriteId,
         })
         .select()
         .single();
