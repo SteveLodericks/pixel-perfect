@@ -7,12 +7,11 @@ import { Calendar, Clock, Video } from "lucide-react";
 
 const BookSession = () => {
   useEffect(() => {
-    // Load Calendly widget script with security attributes
+    // Load Calendly widget script
+    // Note: Calendly's CDN doesn't support crossOrigin="anonymous", so we load it without CORS attributes
     const script = document.createElement("script");
     script.src = "https://assets.calendly.com/assets/external/widget.js";
     script.async = true;
-    script.crossOrigin = "anonymous";
-    script.referrerPolicy = "no-referrer";
     document.body.appendChild(script);
 
     return () => {
