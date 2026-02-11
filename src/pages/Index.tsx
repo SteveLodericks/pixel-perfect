@@ -21,32 +21,32 @@ const Index = () => {
     {
       icon: Compass,
       title: "Career Direction & Transitions",
-      description: "Find the right career path with clarity and confidence",
+      description: "We help you find the right career path with clarity and confidence in your next move",
     },
     {
       icon: Rocket,
       title: "Career Advancement & Engagement",
-      description: "Position yourself for promotion and re-engage with purpose",
+      description: "Move forward with purpose—positioning yourself for promotion and increasing visibility",
     },
     {
       icon: Building2,
       title: "Corporate Coaching & Development",
-      description: "Customized coaching solutions for individuals and teams",
+      description: "Practical coaching for individuals and teams through workshops, presentations, and one-on-one sessions",
     },
     {
       icon: Search,
       title: "Job Search Strategy & Personal Branding",
-      description: "Stand out in competitive markets and attract opportunities",
+      description: "A structured approach to landing the right role—strategy, messaging, and confidence",
     },
     {
       icon: Goal,
-      title: "Goal Setting & Strategic Planning",
-      description: "Turn goals into consistent action with built-in accountability",
+      title: "Goal Setting, Strategic Planning & Accountability",
+      description: "Turn goals into consistent action with a clear plan and built-in accountability",
     },
     {
       icon: Shield,
-      title: "Confidence & Imposter Syndrome Coaching",
-      description: "Build confidence that matches your capabilities",
+      title: "Confidence Building & Imposter Syndrome Coaching",
+      description: "Build confidence that matches your capabilities and own your value",
     },
   ];
 
