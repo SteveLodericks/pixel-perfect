@@ -5,12 +5,12 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  FileText,
-  MessageSquare,
-  Users,
-  Video,
-  Target,
-  TrendingUp,
+  Compass,
+  Rocket,
+  Building2,
+  Search,
+  Goal,
+  Shield,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
@@ -18,82 +18,86 @@ import {
 const Services = () => {
   const services = [
     {
-      icon: Users,
-      title: "One-on-One Career Coaching",
+      icon: Compass,
+      title: "Career Direction & Transitions",
       description:
-        "Personalized coaching sessions focused on your specific career goals and challenges.",
+        "Whether you're starting your career, considering a career change, returning to the workforce, or questioning your current direction, this service helps you gain clarity and confidence in your next move.",
+      subtitle: "We help you find the right career path.",
       features: [
-        "Goal setting and planning",
-        "Career transition support",
-        "Personal branding strategies",
-        "Networking guidance",
+        "Change careers or industries",
+        "Feel aligned with your work again",
+        "Make intentional, informed career decisions",
       ],
-      duration: "45-60 minute sessions",
+      featureLabel: "Ideal for professionals who want to:",
     },
     {
-      icon: Target,
-      title: "Group Coaching",
+      icon: Rocket,
+      title: "Career Advancement & Engagement",
       description:
-        "Learn and grow alongside peers facing similar career challenges in supportive group sessions.",
+        "Designed for professionals who want to grow, advance, or re-engage in their current roles. This coaching focuses on positioning yourself for promotion, increasing visibility, and building a career that keeps you motivated and challenged.",
+      subtitle: "Move forward with purpose—and get noticed.",
       features: [
-        "Collaborative learning environment",
-        "Shared experiences and insights",
-        "Cost-effective option",
-        "Monthly cohort sessions",
+        "Career progression strategy",
+        "Executive presence and influence",
+        "Re-engaging in your current role",
       ],
-      duration: "90-minute group sessions",
+      featureLabel: "Focus areas include:",
     },
     {
-      icon: TrendingUp,
-      title: "Career Counselling",
+      icon: Building2,
+      title: "Corporate Coaching & Development",
       description:
-        "Strategic guidance for long-term career planning and development across various life stages.",
+        "Customized corporate coaching solutions that support employee development, leadership growth, and career engagement. Offered through workshops, presentations, and one-on-one coaching.",
+      subtitle: "Practical coaching for individuals and teams.",
       features: [
-        "Career path exploration",
-        "Skills assessment",
-        "Industry trend analysis",
-        "Long-term strategy development",
+        "Interactive workshops",
+        "Leadership and career development presentations",
+        "One-on-one coaching for employees and leaders",
       ],
-      duration: "Multiple sessions",
+      featureLabel: "Available formats:",
     },
     {
-      icon: FileText,
-      title: "CV Writing",
+      icon: Search,
+      title: "Job Search Strategy & Personal Branding",
       description:
-        "Get a professionally crafted CV that stands out to employers and showcases your unique value proposition.",
+        "End-to-end job search coaching that helps you stand out in competitive markets. We focus on strategy, messaging, and confidence—so you're not just applying, but attracting opportunities.",
+      subtitle: "A structured approach to landing the right role.",
       features: [
-        "ATS-optimized formatting",
-        "Achievement-focused content",
-        "Industry-specific keywords",
-        "Unlimited revisions",
+        "Targeted job search strategy",
+        "Networking and outreach",
+        "Resume and LinkedIn profile development",
+        "Interview preparation and storytelling",
+        "Salary and offer negotiation",
       ],
-      duration: "3-5 business days",
+      featureLabel: "Includes support with:",
     },
     {
-      icon: MessageSquare,
-      title: "Cover Letters",
+      icon: Goal,
+      title: "Goal Setting, Strategic Planning & Accountability",
       description:
-        "Compelling, customized cover letters that capture attention and demonstrate your fit for the role.",
+        "This service helps you move from ideas to execution with a clear plan and built-in accountability. Together, we define meaningful career goals and break them into realistic, strategic steps.",
+      subtitle: "Turn goals into consistent action.",
       features: [
-        "Tailored to specific positions",
-        "Highlights key qualifications",
-        "Professional tone and structure",
-        "Quick turnaround time",
+        "Clear, achievable career goals",
+        "A personalized action plan",
+        "Ongoing accountability and progress tracking",
+        "Momentum and focus",
       ],
-      duration: "2-3 business days",
+      featureLabel: "You'll gain:",
     },
     {
-      icon: Video,
-      title: "Mock Interviews",
+      icon: Shield,
+      title: "Confidence Building & Imposter Syndrome Coaching",
       description:
-        "Practice makes perfect. Build confidence with realistic interview simulations and expert feedback.",
+        "For high-performing professionals who struggle with self-doubt, visibility, or imposter syndrome. This coaching strengthens mindset, confidence, and self-advocacy—so you can show up fully and own your value.",
+      subtitle: "Build confidence that matches your capabilities.",
       features: [
-        "Common and behavioral questions",
-        "Detailed performance feedback",
-        "Body language coaching",
-        "Industry-specific scenarios",
+        "Overcoming imposter syndrome",
+        "Building professional confidence",
+        "Self-advocacy and communication",
+        "Navigating high-stakes conversations",
       ],
-      duration: "60-minute sessions",
+      featureLabel: "Work on:",
     },
   ];
 
@@ -136,22 +140,16 @@ const Services = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  <p className="text-sm font-semibold text-secondary italic">{service.subtitle}</p>
                   <p className="text-muted-foreground">{service.description}</p>
                   <div className="space-y-2">
+                    <p className="text-sm font-semibold text-foreground">{service.featureLabel}</p>
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start space-x-2">
                         <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0 mt-0.5" />
                         <span className="text-sm text-foreground">{feature}</span>
                       </div>
                     ))}
-                  </div>
-                  <div className="pt-4 border-t border-border">
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">
-                        Duration:
-                      </span>{" "}
-                      {service.duration}
-                    </p>
                   </div>
                 </CardContent>
               </Card>
