@@ -5,12 +5,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import {
-  FileText,
-  MessageSquare,
-  Users,
-  Video,
-  Target,
-  TrendingUp,
+  Compass,
+  Rocket,
+  Building2,
+  Search,
+  Goal,
+  Shield,
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
@@ -19,40 +19,34 @@ import heroImage from "@/assets/hero-home.jpeg";
 const Index = () => {
   const services = [
     {
-      icon: Users,
-      title: "One-on-One Coaching",
-      description:
-        "Personalized guidance to navigate your unique career journey",
+      icon: Compass,
+      title: "Career Direction & Transitions",
+      description: "Find the right career path with clarity and confidence",
     },
     {
-      icon: Target,
-      title: "Group Coaching",
-      description:
-        "Collaborative sessions with peers on common career challenges",
+      icon: Rocket,
+      title: "Career Advancement & Engagement",
+      description: "Position yourself for promotion and re-engage with purpose",
     },
     {
-      icon: TrendingUp,
-      title: "Career Counselling",
-      description:
-        "Strategic planning and advice for long-term career success",
+      icon: Building2,
+      title: "Corporate Coaching & Development",
+      description: "Customized coaching solutions for individuals and teams",
     },
     {
-      icon: FileText,
-      title: "CV Writing",
-      description:
-        "Professional CV crafting that highlights your strengths and achievements",
+      icon: Search,
+      title: "Job Search Strategy & Personal Branding",
+      description: "Stand out in competitive markets and attract opportunities",
     },
     {
-      icon: MessageSquare,
-      title: "Cover Letters",
-      description:
-        "Compelling cover letters tailored to your target positions",
+      icon: Goal,
+      title: "Goal Setting & Strategic Planning",
+      description: "Turn goals into consistent action with built-in accountability",
     },
     {
-      icon: Video,
-      title: "Mock Interviews",
-      description:
-        "Practice sessions with feedback to boost your interview confidence",
+      icon: Shield,
+      title: "Confidence & Imposter Syndrome Coaching",
+      description: "Build confidence that matches your capabilities",
     },
   ];
 
