@@ -161,7 +161,7 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/about">
+              <Link to="/about" className="inline-block mt-4">
                 <Button className="bg-primary hover:bg-primary/90">
                   Learn More About Us
                 </Button>
