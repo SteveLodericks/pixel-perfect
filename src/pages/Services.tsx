@@ -238,7 +238,7 @@ const Services = () => {
               Take the first step toward your career goals. Book a free
               consultation to discuss which service is right for you.
             </p>
-            <Link to="/book">
+            <Link to="/book" className="inline-block mt-4">
               <Button size="lg" className="bg-secondary hover:bg-secondary/90">
                 Book Your Free Consultation
                 <ArrowRight className="ml-2 h-5 w-5" />
