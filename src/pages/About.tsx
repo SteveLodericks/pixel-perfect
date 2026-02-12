@@ -30,7 +30,7 @@ const About = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-2xl overflow-hidden shadow-xl bg-background">
+            <div className="overflow-hidden bg-background">
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
