@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -63,20 +63,6 @@ const Contact = () => {
                       id="email"
                       type="email"
                       placeholder="john@example.com"
-                      className="border-border"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="phone"
-                      className="text-sm font-medium text-foreground"
-                    >
-                      Phone Number (Optional)
-                    </label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+27 123 456 789"
                       className="border-border"
                     />
                   </div>
@@ -157,22 +143,6 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-6 w-6 text-secondary" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-semibold text-primary mb-1">
-                        Call Us
-                      </h3>
-                      <p className="text-muted-foreground text-sm">
-                        +27 123 456 789
-                      </p>
-                      <p className="text-muted-foreground text-sm">
-                        Mon-Fri: 9:00 AM - 5:00 PM
-                      </p>
-                    </div>
-                  </div>
 
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
