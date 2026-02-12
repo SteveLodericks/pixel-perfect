@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Instagram, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -61,10 +61,6 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span>info@careeradvance.com</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>+27 123 456 789</span>
               </div>
               <div className="flex space-x-4 pt-2">
                 <a href="https://www.instagram.com/_careeradvancement?igsh=ZDFuemg0c3Jlemt4" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
