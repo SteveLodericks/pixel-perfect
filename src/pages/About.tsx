@@ -34,7 +34,7 @@ const About = () => {
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-[400px] object-contain"
+                className="w-full h-[400px] object-contain [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]"
               />
             </div>
             <div className="space-y-6">
