@@ -29,13 +29,12 @@ const About = () => {
       {/* Story Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="overflow-hidden bg-background">
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-[500px] object-cover rounded-[2.5rem]"
-                style={{ objectPosition: 'center 30%' }}
+                className="w-full object-cover rounded-[2.5rem]"
               />
             </div>
             <div className="space-y-6">
