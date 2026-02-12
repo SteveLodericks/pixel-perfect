@@ -41,7 +41,7 @@ const About = () => {
               <h2 className="text-3xl font-heading font-bold text-primary">
                 Our Story
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 Career Advancement was founded with a simple yet powerful belief:
                 everyone deserves the opportunity to thrive in their professional
                 life. With over a decade of experience in career development and
@@ -49,7 +49,7 @@ const About = () => {
                 navigate career transitions, land dream jobs, and achieve lasting
                 professional success.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 Our approach combines proven coaching methodologies with
                 personalized strategies tailored to each individual's unique
                 strengths, goals, and circumstances. We don't believe in
@@ -59,21 +59,21 @@ const About = () => {
               <h3 className="text-2xl font-heading font-bold text-primary pt-4">
                 Meet Founder & Head Career Coach, Nosi September
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 After earning my Honours degree in Information Systems, I found
                 myself unexpectedly unemployed for several months. Despite
                 spending four years at university, I realized no one had taught
                 me how to structure a compelling CV, present myself confidently
                 in interviews, or negotiate my salary effectively.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 Once I overcame unemployment and built a successful career in
                 banking and financial services, I made a decision: to become the
                 mentor and coach I once needed. Since then, I have coached and
                 mentored hundreds of professionals, helping them build clarity,
                 confidence, and successful career paths.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-justify">
                 Witnessing the powerful impact coaching can have on people's
                 lives led to the founding of Career Advancement. Today, we
                 support professionals from around the world, partnering with
