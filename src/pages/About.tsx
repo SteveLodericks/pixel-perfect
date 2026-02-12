@@ -34,7 +34,7 @@ const About = () => {
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-[400px] object-contain rounded-3xl"
+                className="w-full h-[400px] object-contain rounded-[2.5rem]"
               />
             </div>
             <div className="space-y-6">
