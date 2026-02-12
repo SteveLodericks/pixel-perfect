@@ -56,35 +56,31 @@ const About = () => {
                 one-size-fits-all solutions—your career journey is unique, and
                 your coaching experience should be too.
               </p>
+              <h3 className="text-2xl font-heading font-bold text-primary pt-4">
+                Meet Founder & Head Career Coach, Nosi September
+              </h3>
+              <p className="text-muted-foreground leading-relaxed text-justify">
+                After earning my Honours degree in Information Systems, I found
+                myself unexpectedly unemployed for several months. Despite
+                spending four years at university, I realized no one had taught
+                me how to structure a compelling CV, present myself confidently
+                in interviews, or negotiate my salary effectively.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-justify">
+                Once I overcame unemployment and built a successful career in
+                banking and financial services, I made a decision: to become the
+                mentor and coach I once needed. Since then, I have coached and
+                mentored hundreds of professionals, helping them build clarity,
+                confidence, and successful career paths.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-justify">
+                Witnessing the powerful impact coaching can have on people's
+                lives led to the founding of Career Advancement. Today, we
+                support professionals from around the world, partnering with
+                them to build careers they are proud of and futures they are
+                excited about.
+              </p>
             </div>
-          </div>
-
-          {/* Founder Section */}
-          <div className="max-w-4xl mx-auto mt-16 space-y-6">
-            <h3 className="text-2xl font-heading font-bold text-primary">
-              Meet Founder & Head Career Coach, Nosi September
-            </h3>
-            <p className="text-muted-foreground leading-relaxed text-justify">
-              After earning my Honours degree in Information Systems, I found
-              myself unexpectedly unemployed for several months. Despite
-              spending four years at university, I realized no one had taught
-              me how to structure a compelling CV, present myself confidently
-              in interviews, or negotiate my salary effectively.
-            </p>
-            <p className="text-muted-foreground leading-relaxed text-justify">
-              Once I overcame unemployment and built a successful career in
-              banking and financial services, I made a decision: to become the
-              mentor and coach I once needed. Since then, I have coached and
-              mentored hundreds of professionals, helping them build clarity,
-              confidence, and successful career paths.
-            </p>
-            <p className="text-muted-foreground leading-relaxed text-justify">
-              Witnessing the powerful impact coaching can have on people's
-              lives led to the founding of Career Advancement. Today, we
-              support professionals from around the world, partnering with
-              them to build careers they are proud of and futures they are
-              excited about.
-            </p>
           </div>
         </div>
       </section>
