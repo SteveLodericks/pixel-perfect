@@ -30,11 +30,11 @@ const About = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
+            <div className="rounded-2xl overflow-hidden shadow-xl max-h-[400px]">
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-auto"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="space-y-6">
