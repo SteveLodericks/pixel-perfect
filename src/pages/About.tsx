@@ -34,7 +34,7 @@ const About = () => {
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-auto object-cover"
+                className="w-full h-[400px] object-contain"
               />
             </div>
             <div className="space-y-6">
