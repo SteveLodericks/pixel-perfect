@@ -34,7 +34,8 @@ const About = () => {
               <img
                 src={aboutImage}
                 alt="Career Advancement team"
-                className="w-full h-[500px] object-cover object-top rounded-[2.5rem]"
+                className="w-full h-[500px] object-cover rounded-[2.5rem]"
+                style={{ objectPosition: 'center 30%' }}
               />
             </div>
             <div className="space-y-6">
