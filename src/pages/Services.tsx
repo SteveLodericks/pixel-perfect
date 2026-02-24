@@ -6,11 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Compass,
-  Rocket,
   Building2,
   Search,
-  Goal,
-  Shield,
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
@@ -27,34 +24,10 @@ const Services = () => {
         "Change careers or industries",
         "Feel aligned with your work again",
         "Make intentional, informed career decisions",
+        "Goal setting, strategic planning & accountability",
+        "Confidence building & imposter syndrome coaching",
       ],
       featureLabel: "Ideal for professionals who want to:",
-    },
-    {
-      icon: Rocket,
-      title: "Career Advancement & Engagement",
-      description:
-        "For professionals ready to grow, get promoted, or re-engage in their current role. We focus on positioning, visibility, and career momentum.",
-      subtitle: "Move forward with purpose — and get noticed.",
-      features: [
-        "Career progression strategy",
-        "Executive presence and influence",
-        "Re-engaging in your current role",
-      ],
-      featureLabel: "Focus areas include:",
-    },
-    {
-      icon: Building2,
-      title: "Corporate Coaching & Development",
-      description:
-        "Customized programs that support employee development, leadership growth, and team engagement — delivered as workshops, presentations, or 1:1 sessions.",
-      subtitle: "Practical coaching for individuals and teams.",
-      features: [
-        "Interactive workshops",
-        "Leadership and career development presentations",
-        "One-on-one coaching for employees and leaders",
-      ],
-      featureLabel: "Available formats:",
     },
     {
       icon: Search,
@@ -72,32 +45,18 @@ const Services = () => {
       featureLabel: "Includes support with:",
     },
     {
-      icon: Goal,
-      title: "Goal Setting, Strategic Planning & Accountability",
+      icon: Building2,
+      title: "Corporate Coaching & Development",
       description:
-        "We help you move from ideas to execution with a clear plan and built-in accountability. Together, we define meaningful career goals and break them into realistic, achievable steps.",
-      subtitle: "Turn goals into consistent action.",
+        "Customized programs that support employee development, leadership growth, and team engagement — delivered as workshops, presentations, or 1:1 sessions.",
+      subtitle: "Practical coaching for individuals and teams.",
       features: [
-        "Clear, achievable career goals",
-        "A personalized action plan",
-        "Ongoing accountability and progress tracking",
-        "Momentum and focus",
+        "Interactive workshops",
+        "Leadership and career development presentations",
+        "One-on-one coaching for employees and leaders",
+        "Career advancement & engagement strategies",
       ],
-      featureLabel: "You'll gain:",
-    },
-    {
-      icon: Shield,
-      title: "Confidence Building & Imposter Syndrome Coaching",
-      description:
-        "For high-performing professionals who struggle with self-doubt or imposter syndrome. This coaching strengthens mindset, self-advocacy, and presence so you can show up fully and own your value.",
-      subtitle: "Build confidence that matches your capabilities.",
-      features: [
-        "Overcoming imposter syndrome",
-        "Building professional confidence",
-        "Self-advocacy and communication",
-        "Navigating high-stakes conversations",
-      ],
-      featureLabel: "Work on:",
+      featureLabel: "Available formats:",
     },
   ];
 

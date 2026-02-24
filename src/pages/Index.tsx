@@ -6,11 +6,8 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import {
   Compass,
-  Rocket,
   Building2,
   Search,
-  Goal,
-  Shield,
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
@@ -24,29 +21,14 @@ const Index = () => {
       description: "Find clarity on your path and take your next step with confidence.",
     },
     {
-      icon: Rocket,
-      title: "Career Advancement & Engagement",
-      description: "Position yourself for promotion and make your impact visible.",
-    },
-    {
-      icon: Building2,
-      title: "Corporate Coaching & Development",
-      description: "Workshops and 1:1 sessions that grow teams and leaders.",
-    },
-    {
       icon: Search,
       title: "Job Search Strategy & Personal Branding",
       description: "Stand out, get interviews, and negotiate what you're worth.",
     },
     {
-      icon: Goal,
-      title: "Goal Setting, Planning & Accountability",
-      description: "Turn ambition into action with a clear, trackable plan.",
-    },
-    {
-      icon: Shield,
-      title: "Confidence & Imposter Syndrome Coaching",
-      description: "Own your value and show up fully in every room.",
+      icon: Building2,
+      title: "Corporate Coaching & Development",
+      description: "Workshops and 1:1 sessions that grow teams and leaders.",
     },
   ];
 
@@ -109,7 +91,7 @@ const Index = () => {
               What we offer.
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Six focused services. One goal: your success.
+              Three focused services. One goal: your success.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
