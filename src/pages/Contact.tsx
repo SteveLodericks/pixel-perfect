@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, Linkedin } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Contact = () => {
   return (
@@ -18,11 +24,10 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-heading font-bold text-primary">
-              Get in Touch
+              Let's talk.
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions about our services? We'd love to hear from you. Send
-              us a message and we'll respond as soon as possible.
+              Tell us where you are. We'll help you figure out where to go.
             </p>
           </div>
         </div>
@@ -35,21 +40,27 @@ const Contact = () => {
             {/* Contact Form */}
             <Card className="border-border">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-heading font-bold text-primary mb-6">
-                  Send us a Message
+                <h2 className="text-2xl font-heading font-bold text-primary mb-2">
+                  Book a free consultation.
                 </h2>
+                <p className="text-muted-foreground text-sm mb-6">
+                  No pressure. No pitch. Just an honest 30-minute conversation
+                  about your goals. Fill in the form and we'll be in touch within
+                  one business day.
+                </p>
                 <form className="space-y-6">
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
                       className="text-sm font-medium text-foreground"
                     >
-                      Full Name
+                      Full Name *
                     </label>
                     <Input
                       id="name"
                       placeholder="John Doe"
                       className="border-border"
+                      required
                     />
                   </div>
                   <div className="space-y-2">
@@ -57,12 +68,27 @@ const Contact = () => {
                       htmlFor="email"
                       className="text-sm font-medium text-foreground"
                     >
-                      Email Address
+                      Email Address *
                     </label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="john@example.com"
+                      className="border-border"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="phone"
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Phone Number (optional)
+                    </label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+27 00 000 0000"
                       className="border-border"
                     />
                   </div>
@@ -71,19 +97,17 @@ const Contact = () => {
                       htmlFor="service"
                       className="text-sm font-medium text-foreground"
                     >
-                      Service Interested In
+                      What are you looking for?
                     </label>
                     <select
                       id="service"
                       className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                     >
-                      <option value="">Select a service</option>
-                      <option value="cv">CV Writing</option>
-                      <option value="cover">Cover Letters</option>
-                      <option value="interview">Mock Interviews</option>
-                      <option value="one-on-one">One-on-One Coaching</option>
-                      <option value="group">Group Coaching</option>
-                      <option value="counselling">Career Counselling</option>
+                      <option value="">Select an option</option>
+                      <option value="career-coaching">Career Coaching</option>
+                      <option value="corporate-training">Corporate Training</option>
+                      <option value="speaking">Speaking Engagement</option>
+                      <option value="not-sure">Not Sure</option>
                     </select>
                   </div>
                   <div className="space-y-2">
@@ -91,12 +115,12 @@ const Contact = () => {
                       htmlFor="message"
                       className="text-sm font-medium text-foreground"
                     >
-                      Message
+                      Tell us a bit about your situation (optional)
                     </label>
                     <Textarea
                       id="message"
-                      placeholder="Tell us about your career goals and how we can help..."
-                      rows={5}
+                      placeholder="Share a bit about where you are in your career and what you're looking for..."
+                      rows={4}
                       className="border-border"
                     />
                   </div>
@@ -104,7 +128,7 @@ const Contact = () => {
                     type="submit"
                     className="w-full bg-secondary hover:bg-secondary/90"
                   >
-                    Send Message
+                    Submit
                     <Send className="ml-2 h-4 w-4" />
                   </Button>
                 </form>
@@ -115,13 +139,8 @@ const Contact = () => {
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-heading font-bold text-primary mb-6">
-                  Contact Information
+                  Or reach us directly.
                 </h2>
-                <p className="text-muted-foreground mb-8">
-                  Prefer to reach out directly? Use any of the contact methods
-                  below. We're here to help you take the next step in your career
-                  journey.
-                </p>
               </div>
 
               <Card className="border-border">
@@ -132,17 +151,27 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-heading font-semibold text-primary mb-1">
-                        Email Us
+                        Email
                       </h3>
                       <p className="text-muted-foreground text-sm">
                         info@careeradvance.com
                       </p>
-                      <p className="text-muted-foreground text-sm">
-                        support@careeradvance.com
-                      </p>
                     </div>
                   </div>
 
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                      <Linkedin className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-semibold text-primary mb-1">
+                        LinkedIn
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        Connect with us on LinkedIn
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
@@ -163,21 +192,50 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-border bg-primary text-primary-foreground">
+              {/* FAQ Section */}
+              <Card className="border-border">
                 <CardContent className="p-6">
-                  <h3 className="font-heading font-semibold text-xl mb-3">
-                    Business Hours
+                  <h3 className="font-heading font-semibold text-xl text-primary mb-4">
+                    Common questions.
                   </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Monday - Friday</span>
-                      <span>9:00 AM - 5:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Saturday - Sunday</span>
-                      <span>1:00 PM - 6:00 PM</span>
-                    </div>
-                  </div>
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-sm font-medium text-foreground">
+                        How quickly can I start?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-sm">
+                        Most clients begin within 1–3 business days of their
+                        consultation.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger className="text-sm font-medium text-foreground">
+                        Do you work with clients outside the UK/South Africa?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-sm">
+                        Yes — we work with professionals globally via Zoom.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-3">
+                      <AccordionTrigger className="text-sm font-medium text-foreground">
+                        I don't know which service I need.
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-sm">
+                        Start with the free consultation. We'll recommend the right
+                        path based on your situation.
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-4">
+                      <AccordionTrigger className="text-sm font-medium text-foreground">
+                        How long does coaching typically last?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-sm">
+                        Engagements range from a single intensive session to
+                        multi-month programs, scoped around your goals and
+                        timeline.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </CardContent>
               </Card>
             </div>

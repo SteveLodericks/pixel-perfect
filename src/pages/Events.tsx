@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Users, Clock } from "lucide-react";
+import { Calendar, MapPin, Users, Clock, ArrowRight } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { parse, isPast } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
@@ -188,9 +189,8 @@ const Events = () => {
               Events & Workshops
             </h1>
             <p className="text-xl text-muted-foreground">
-              Join our interactive events and workshops to learn valuable career
-              skills, connect with like-minded professionals, and accelerate your
-              career growth.
+              Live sessions, group workshops, and speaking engagements — designed
+              to equip and inspire.
             </p>
           </div>
         </div>
@@ -199,9 +199,12 @@ const Events = () => {
       {/* Upcoming Events */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-heading font-bold text-primary mb-12 text-center">
+          <h2 className="text-4xl font-heading font-bold text-primary mb-4 text-center">
             Upcoming Events
           </h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+            Join us. Check back regularly for upcoming workshops, webinars, and community events. All events are designed to give you practical tools and a chance to connect with a community of ambitious professionals.
+          </p>
 
           {/* Eventbrite Events from Database */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-6">
@@ -397,27 +400,24 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
+      {/* Speaking & Corporate Events */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center space-y-6 bg-primary text-primary-foreground rounded-2xl p-12">
+          <div className="max-w-3xl mx-auto text-center space-y-6 bg-primary text-primary-foreground rounded-2xl p-12">
             <h2 className="text-3xl font-heading font-bold">
-              Stay Updated on Upcoming Events
+              Bring Career Advancement to your organization.
             </h2>
             <p className="text-lg text-primary-foreground/90">
-              Subscribe to our newsletter to receive notifications about new
-              workshops, seminars, and career development events.
+              Nosi is available for keynotes, panel discussions, and corporate
+              training events. Topics include career development, confidence,
+              personal branding, and leadership.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-              <Button className="bg-secondary hover:bg-secondary/90">
-                Subscribe
+            <Link to="/contact">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 mt-4">
+                Request a Speaking Engagement
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
