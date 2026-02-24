@@ -41,30 +41,29 @@ const About = () => {
             </div>
             <div className="space-y-6">
               <h2 className="text-3xl font-heading font-bold text-primary">
-                How Career Advancement began.
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                After earning her Honours degree in Information Systems, founder
-                Nosi September found herself unexpectedly unemployed — and
-                realized no one had ever taught her how to write a compelling CV,
-                interview with confidence, or negotiate salary. Once she built a
-                successful career in banking and financial services, she made a
-                decision: become the mentor she had always needed. Career
-                Advancement was born from that experience. Today, we partner with
-                professionals around the world to build careers they're excited
-                about.
-              </p>
-              <h3 className="text-2xl font-heading font-bold text-primary pt-4">
                 Meet Nosi September
-              </h3>
+              </h2>
               <p className="text-sm font-semibold text-secondary italic">
                 Founder & Head Career Coach
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Nosi brings over a decade of experience in career development and
-                human resources coaching. Her approach combines proven methodology
-                with deep personalization — because no two career journeys are the
-                same.
+                human resources coaching. After graduating with an Honours degree
+                in Information Systems, she found herself unemployed and
+                completely unprepared. Four years of university, and no one had
+                taught her how to write a CV that lands, interview with
+                conviction, or negotiate her own worth.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                She figured it out. Built a successful career in banking and
+                financial services. Then made a deliberate choice: go back and
+                become the mentor she never had.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                That decision became Career Advancement. Today, Nosi and her team
+                work with professionals across the globe - combining proven
+                methodology with deep personalization, because no two career
+                journeys are the same.
               </p>
             </div>
           </div>
