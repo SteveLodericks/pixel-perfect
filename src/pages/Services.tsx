@@ -18,42 +18,41 @@ const Services = () => {
       icon: Compass,
       title: "Career Direction & Transitions",
       description:
-        "Whether you're starting out, considering a pivot, or returning to work — this service gives you clarity and confidence for your next move.",
-      subtitle: "We help you find the right career path.",
+        "For professionals at a crossroads — starting out, pivoting, or returning to work. We help you gain clarity and take your next step with confidence.",
+      subtitle: "Find your path. Move with purpose.",
       features: [
         "Change careers or industries",
         "Feel aligned with your work again",
-        "Make intentional, informed career decisions",
+        "Make intentional, informed decisions",
       ],
-      featureLabel: "Ideal for professionals who want to:",
+      featureLabel: "Ideal if you want to:",
     },
     {
       icon: Search,
       title: "Job Search Strategy & Personal Branding",
       description:
-        "End-to-end coaching to help you stand out in competitive markets — focused on strategy, messaging, and confidence so you attract opportunities, not just applications.",
-      subtitle: "A structured approach to landing the right role.",
+        "For professionals ready to enter the market — we help you stand out, tell your story, and land the role you actually want.",
+      subtitle: "Get noticed. Get hired.",
       features: [
-        "Targeted job search strategy",
-        "Networking and outreach",
-        "Resume and LinkedIn profile development",
-        "Interview preparation and storytelling",
+        "Resume and LinkedIn optimization",
+        "Networking and outreach strategy",
+        "Interview prep and storytelling",
         "Salary and offer negotiation",
       ],
-      featureLabel: "Includes support with:",
+      featureLabel: "Includes:",
     },
     {
       icon: Building2,
       title: "Corporate Coaching & Development",
       description:
-        "Customized programs that support employee development, leadership growth, and team engagement — delivered as workshops, presentations, or 1:1 sessions.",
-      subtitle: "Practical coaching for individuals and teams.",
+        "For organizations that want to develop talent — we deliver customized coaching through workshops, presentations, and 1:1 sessions.",
+      subtitle: "Invest in your people.",
       features: [
-        "Interactive workshops",
-        "Leadership and career development presentations",
-        "One-on-one coaching for employees and leaders",
+        "Interactive team workshops",
+        "Leadership development sessions",
+        "One-on-one coaching for employees",
       ],
-      featureLabel: "Available formats:",
+      featureLabel: "Available as:",
     },
   ];
 
