@@ -3,6 +3,9 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import aboutImage from "@/assets/about-team.jpg";
 
 const About = () => {
@@ -16,11 +19,11 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-heading font-bold text-primary">
-              About Career Advancement
+              We help professionals build careers they're proud of.
             </h1>
             <p className="text-xl text-muted-foreground">
-              Empowering professionals to reach their full potential through
-              personalized career coaching and strategic guidance.
+              Personalized coaching grounded in real experience — because
+              everyone deserves the opportunity to thrive.
             </p>
           </div>
         </div>
@@ -39,46 +42,30 @@ const About = () => {
             </div>
             <div className="space-y-6">
               <h2 className="text-3xl font-heading font-bold text-primary">
-                Our Story
+                How Career Advancement began.
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Career Advancement was founded with a simple yet powerful belief:
-                everyone deserves the opportunity to thrive in their professional
-                life. With over a decade of experience in career development and
-                human resources coaching, we've helped hundreds of professionals
-                navigate career transitions, land dream jobs, and achieve lasting
-                professional success.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Our approach combines proven coaching methodologies with
-                personalized strategies tailored to each individual's unique
-                strengths, goals, and circumstances. We don't believe in
-                one-size-fits-all solutions—your career journey is unique, and
-                your coaching experience should be too.
+                After earning her Honours degree in Information Systems, founder
+                Nosi September found herself unexpectedly unemployed — and
+                realized no one had ever taught her how to write a compelling CV,
+                interview with confidence, or negotiate salary. Once she built a
+                successful career in banking and financial services, she made a
+                decision: become the mentor she had always needed. Career
+                Advancement was born from that experience. Today, we partner with
+                professionals around the world to build careers they're excited
+                about.
               </p>
               <h3 className="text-2xl font-heading font-bold text-primary pt-4">
-                Meet Founder & Head Career Coach, Nosi September
+                Meet Nosi September
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                After earning my Honours degree in Information Systems, I found
-                myself unexpectedly unemployed for several months. Despite
-                spending four years at university, I realized no one had taught
-                me how to structure a compelling CV, present myself confidently
-                in interviews, or negotiate my salary effectively.
+              <p className="text-sm font-semibold text-secondary italic">
+                Founder & Head Career Coach
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Once I overcame unemployment and built a successful career in
-                banking and financial services, I made a decision: to become the
-                mentor and coach I once needed. Since then, I have coached and
-                mentored hundreds of professionals, helping them build clarity,
-                confidence, and successful career paths.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Witnessing the powerful impact coaching can have on people's
-                lives led to the founding of Career Advancement. Today, we
-                support professionals from around the world, partnering with
-                them to build careers they are proud of and futures they are
-                excited about.
+                Nosi brings over a decade of experience in career development and
+                human resources coaching. Her approach combines proven methodology
+                with deep personalization — because no two career journeys are the
+                same.
               </p>
             </div>
           </div>
@@ -99,10 +86,9 @@ const About = () => {
                   Our Vision
                 </h3>
                 <p className="text-muted-foreground text-center leading-relaxed">
-                  To be the leading catalyst for professional transformation,
-                  empowering individuals worldwide to unlock their full career
-                  potential and achieve meaningful, fulfilling work that aligns
-                  with their values and aspirations.
+                  To be the leading catalyst for professional transformation —
+                  empowering individuals everywhere to do work that aligns with
+                  who they are.
                 </p>
               </CardContent>
             </Card>
@@ -117,10 +103,9 @@ const About = () => {
                   Our Mission
                 </h3>
                 <p className="text-muted-foreground text-center leading-relaxed">
-                  To provide exceptional, personalized career coaching services
-                  that equip professionals with the skills, confidence, and
-                  strategies needed to navigate career transitions, secure
-                  opportunities, and achieve sustainable professional growth.
+                  To equip professionals with the clarity, confidence, and
+                  strategies needed to navigate transitions, secure opportunities,
+                  and grow sustainably.
                 </p>
               </CardContent>
             </Card>
@@ -152,7 +137,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-4xl font-heading font-bold text-primary text-center">
-              Our Approach
+              How we work.
             </h2>
             <div className="space-y-6">
               <Card className="border-border">
@@ -161,9 +146,8 @@ const About = () => {
                     Personalized Strategy
                   </h4>
                   <p className="text-muted-foreground">
-                    We begin by understanding your unique background, goals, and
-                    challenges. Every coaching plan is customized to your specific
-                    needs and career aspirations.
+                    We start by understanding your background, goals, and blockers.
+                    Every plan is built around you — not a template.
                   </p>
                 </CardContent>
               </Card>
@@ -173,9 +157,8 @@ const About = () => {
                     Actionable Insights
                   </h4>
                   <p className="text-muted-foreground">
-                    We provide practical, immediately applicable strategies and
-                    tools that you can implement right away to see real results in
-                    your career journey.
+                    We give you tools you can use immediately. No theory-heavy
+                    sessions, just strategies you can act on today.
                   </p>
                 </CardContent>
               </Card>
@@ -185,12 +168,19 @@ const About = () => {
                     Ongoing Support
                   </h4>
                   <p className="text-muted-foreground">
-                    Career development is a journey, not a destination. We're with
-                    you every step of the way, providing continuous guidance,
-                    accountability, and support as you progress toward your goals.
+                    Career growth is a journey. We stay with you — providing
+                    accountability, guidance, and encouragement at every milestone.
                   </p>
                 </CardContent>
               </Card>
+            </div>
+            <div className="text-center pt-4">
+              <Link to="/book">
+                <Button size="lg" className="bg-secondary hover:bg-secondary/90">
+                  Book a Free Consultation
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

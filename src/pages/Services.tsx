@@ -21,7 +21,7 @@ const Services = () => {
       icon: Compass,
       title: "Career Direction & Transitions",
       description:
-        "Whether you're starting your career, considering a career change, returning to the workforce, or questioning your current direction, this service helps you gain clarity and confidence in your next move.",
+        "Whether you're starting out, considering a pivot, or returning to work — this service gives you clarity and confidence for your next move.",
       subtitle: "We help you find the right career path.",
       features: [
         "Change careers or industries",
@@ -34,8 +34,8 @@ const Services = () => {
       icon: Rocket,
       title: "Career Advancement & Engagement",
       description:
-        "Designed for professionals who want to grow, advance, or re-engage in their current roles. This coaching focuses on positioning yourself for promotion, increasing visibility, and building a career that keeps you motivated and challenged.",
-      subtitle: "Move forward with purpose—and get noticed.",
+        "For professionals ready to grow, get promoted, or re-engage in their current role. We focus on positioning, visibility, and career momentum.",
+      subtitle: "Move forward with purpose — and get noticed.",
       features: [
         "Career progression strategy",
         "Executive presence and influence",
@@ -47,7 +47,7 @@ const Services = () => {
       icon: Building2,
       title: "Corporate Coaching & Development",
       description:
-        "Customized corporate coaching solutions that support employee development, leadership growth, and career engagement. Offered through workshops, presentations, and one-on-one coaching.",
+        "Customized programs that support employee development, leadership growth, and team engagement — delivered as workshops, presentations, or 1:1 sessions.",
       subtitle: "Practical coaching for individuals and teams.",
       features: [
         "Interactive workshops",
@@ -60,7 +60,7 @@ const Services = () => {
       icon: Search,
       title: "Job Search Strategy & Personal Branding",
       description:
-        "End-to-end job search coaching that helps you stand out in competitive markets. We focus on strategy, messaging, and confidence—so you're not just applying, but attracting opportunities.",
+        "End-to-end coaching to help you stand out in competitive markets — focused on strategy, messaging, and confidence so you attract opportunities, not just applications.",
       subtitle: "A structured approach to landing the right role.",
       features: [
         "Targeted job search strategy",
@@ -75,7 +75,7 @@ const Services = () => {
       icon: Goal,
       title: "Goal Setting, Strategic Planning & Accountability",
       description:
-        "This service helps you move from ideas to execution with a clear plan and built-in accountability. Together, we define meaningful career goals and break them into realistic, strategic steps.",
+        "We help you move from ideas to execution with a clear plan and built-in accountability. Together, we define meaningful career goals and break them into realistic, achievable steps.",
       subtitle: "Turn goals into consistent action.",
       features: [
         "Clear, achievable career goals",
@@ -89,7 +89,7 @@ const Services = () => {
       icon: Shield,
       title: "Confidence Building & Imposter Syndrome Coaching",
       description:
-        "For high-performing professionals who struggle with self-doubt, visibility, or imposter syndrome. This coaching strengthens mindset, confidence, and self-advocacy—so you can show up fully and own your value.",
+        "For high-performing professionals who struggle with self-doubt or imposter syndrome. This coaching strengthens mindset, self-advocacy, and presence so you can show up fully and own your value.",
       subtitle: "Build confidence that matches your capabilities.",
       features: [
         "Overcoming imposter syndrome",
@@ -111,12 +111,10 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <h1 className="text-5xl md:text-6xl font-heading font-bold text-primary">
-              Our Services
+              Services built for every stage of your career.
             </h1>
             <p className="text-xl text-muted-foreground">
-              Comprehensive career coaching solutions designed to support you at
-              every stage of your professional journey. Choose the service that
-              best fits your current needs.
+              Choose the coaching that fits where you are right now.
             </p>
           </div>
         </div>

@@ -21,40 +21,40 @@ const Index = () => {
     {
       icon: Compass,
       title: "Career Direction & Transitions",
-      description: "We help you find the right career path with clarity and confidence in your next move",
+      description: "Find clarity on your path and take your next step with confidence.",
     },
     {
       icon: Rocket,
       title: "Career Advancement & Engagement",
-      description: "Move forward with purpose—positioning yourself for promotion and increasing visibility",
+      description: "Position yourself for promotion and make your impact visible.",
     },
     {
       icon: Building2,
       title: "Corporate Coaching & Development",
-      description: "Practical coaching for individuals and teams through workshops, presentations, and one-on-one sessions",
+      description: "Workshops and 1:1 sessions that grow teams and leaders.",
     },
     {
       icon: Search,
       title: "Job Search Strategy & Personal Branding",
-      description: "A structured approach to landing the right role—strategy, messaging, and confidence",
+      description: "Stand out, get interviews, and negotiate what you're worth.",
     },
     {
       icon: Goal,
-      title: "Goal Setting, Strategic Planning & Accountability",
-      description: "Turn goals into consistent action with a clear plan and built-in accountability",
+      title: "Goal Setting, Planning & Accountability",
+      description: "Turn ambition into action with a clear, trackable plan.",
     },
     {
       icon: Shield,
-      title: "Confidence Building & Imposter Syndrome Coaching",
-      description: "Build confidence that matches your capabilities and own your value",
+      title: "Confidence & Imposter Syndrome Coaching",
+      description: "Own your value and show up fully in every room.",
     },
   ];
 
   const benefits = [
-    "Personalized career strategies",
+    "Personalized strategy for your unique goals",
     "Expert guidance from certified coaches",
-    "Proven track record of success",
-    "Flexible scheduling options",
+    "Proven results across industries and career levels",
+    "Flexible scheduling — virtual or in-person",
   ];
 
   return (
@@ -68,11 +68,11 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-5xl md:text-6xl font-heading font-bold text-primary leading-tight">
-                Advance Your Career With Us
+                Advance Your Career With Confidence.
               </h1>
               <p className="text-xl text-muted-foreground">
-                Professional career coaching to help you unlock your potential,
-                land your dream job, and achieve lasting career success.
+                Expert coaching to help you find direction, land your next role,
+                and grow into the professional you know you can be.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/book">
@@ -106,11 +106,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold text-primary mb-4">
-              Our Services
+              What we offer.
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive career coaching services designed to help you succeed
-              at every stage of your professional journey.
+              Six focused services. One goal: your success.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -147,11 +146,11 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-4xl font-heading font-bold text-primary">
-                Why Choose Career Advancement?
+                Built for people who are serious about their careers.
               </h2>
               <p className="text-lg text-muted-foreground">
-                We're committed to your success. Our experienced coaches provide
-                personalized support to help you achieve your career goals.
+                Our coaches bring real-world hiring and HR expertise. No templates.
+                No generic advice. Just strategies that work for you.
               </p>
               <ul className="space-y-4">
                 {benefits.map((benefit, index) => (
