@@ -55,7 +55,7 @@ const Contact = () => {
                 </div>
 
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/career-mycareeradvance"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start space-x-4 hover:opacity-80 transition-opacity"
