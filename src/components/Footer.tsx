@@ -66,7 +66,7 @@ const Footer = () => {
                 <a href="https://www.instagram.com/_careeradvancement?igsh=ZDFuemg0c3Jlemt4" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" className="hover:text-secondary transition-colors">
+                <a href="https://www.linkedin.com/company/career-mycareeradvance" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   <Linkedin className="h-5 w-5" />
                 </a>
               </div>
