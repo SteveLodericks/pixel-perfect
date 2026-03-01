@@ -10,19 +10,6 @@ import { useEffect, useState, useMemo } from "react";
 import { parse, isPast } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 
-declare global {
-  interface Window {
-    EBWidgets: {
-      createWidget: (config: {
-        widgetType: string;
-        eventId: string;
-        modal: boolean;
-        modalTriggerElementId: string;
-        onOrderComplete: () => void;
-      }) => void;
-    };
-  }
-}
 
 interface PublicEvent {
   id: string;
@@ -62,38 +49,8 @@ const Events = () => {
     };
 
     fetchEvents();
-
-    // Load Eventbrite widget script with security attributes
-    const script = document.createElement("script");
-    script.src = "https://www.eventbrite.com/static/widgets/eb_widgets.js";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    script.referrerPolicy = "no-referrer";
-    document.body.appendChild(script);
-
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
   }, []);
 
-  // Initialize Eventbrite widgets when events are loaded
-  useEffect(() => {
-    if (eventbriteEvents.length > 0 && window.EBWidgets) {
-      eventbriteEvents.forEach((event) => {
-        window.EBWidgets.createWidget({
-          widgetType: "checkout",
-          eventId: event.eventbrite_id,
-          modal: true,
-          modalTriggerElementId: `eventbrite-widget-modal-trigger-${event.eventbrite_id}`,
-          onOrderComplete: () => {
-            console.log("Order complete!");
-          },
-        });
-      });
-    }
-  }, [eventbriteEvents]);
 
   const parseEventDateTime = (dateStr: string | null, timeStr: string | null) => {
     try {
@@ -255,23 +212,18 @@ const Events = () => {
                       </div>
                     )}
                   </div>
-                  <noscript>
-                    <a
-                      href={`https://www.eventbrite.com/e/tickets-${event.eventbrite_id}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      className="text-secondary hover:underline text-sm"
-                    >
-                      Buy Tickets on Eventbrite
-                    </a>
-                  </noscript>
-                  <Button
-                    id={`eventbrite-widget-modal-trigger-${event.eventbrite_id}`}
-                    type="button"
-                    className="w-full bg-secondary hover:bg-secondary/90"
+                  <a
+                    href={`https://www.eventbrite.com/e/${event.eventbrite_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Buy Tickets
-                  </Button>
+                    <Button
+                      type="button"
+                      className="w-full bg-secondary hover:bg-secondary/90"
+                    >
+                      Buy Tickets
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             ))}
