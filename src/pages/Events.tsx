@@ -61,58 +61,6 @@ const Events = () => {
     }
   };
 
-  const allStaticEvents = [
-    {
-      title: "Career Transition Workshop",
-      date: "December 15, 2025",
-      time: "2:00 PM - 5:00 PM",
-      location: "Online via Zoom",
-      capacity: "20 spots available",
-      description:
-        "Learn proven strategies for successfully transitioning to a new career field or industry.",
-      type: "Workshop",
-    },
-    {
-      title: "Networking Strategies Masterclass",
-      date: "January 10, 2026",
-      time: "6:00 PM - 8:00 PM",
-      location: "Virtual Event",
-      capacity: "30 spots available",
-      description:
-        "Master the art of professional networking both online and in-person to accelerate your career growth.",
-      type: "Masterclass",
-    },
-    {
-      title: "Resume Writing Bootcamp",
-      date: "January 25, 2026",
-      time: "10:00 AM - 1:00 PM",
-      location: "Online Workshop",
-      capacity: "25 spots available",
-      description:
-        "Intensive session on creating compelling, ATS-friendly resumes that get you noticed by recruiters.",
-      type: "Bootcamp",
-    },
-  ];
-
-  const { upcomingEvents, pastEvents } = useMemo(() => {
-    const upcoming: typeof allStaticEvents = [];
-    const past: Array<{ title: string; date: string; attendees?: string; description: string; time?: string; location?: string; capacity?: string; type?: string }> = [];
-
-    // Categorize static events
-    allStaticEvents.forEach((event) => {
-      const eventDateTime = parseEventDateTime(event.date, event.time);
-      if (isPast(eventDateTime)) {
-        past.push({
-          ...event,
-          attendees: event.capacity // Use capacity as attendees for past events
-        });
-      } else {
-        upcoming.push(event);
-      }
-    });
-
-    return { upcomingEvents: upcoming, pastEvents: past };
-  }, []);
 
   const { upcomingEventbriteEvents, pastEventbriteEvents } = useMemo(() => {
     const upcoming: PublicEvent[] = [];
@@ -232,51 +180,6 @@ const Events = () => {
               </Card>
             ))}
           </div>
-
-          {/* Static Upcoming Events */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {upcomingEvents.map((event, index) => (
-              <Card
-                key={index}
-                className="border-border hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    <Badge className="bg-secondary text-white">{event.type}</Badge>
-                  </div>
-                  <CardTitle className="text-xl font-heading text-primary">
-                    {event.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground text-sm">
-                    {event.description}
-                  </p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center space-x-2 text-foreground">
-                      <Calendar className="h-4 w-4 text-secondary" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-foreground">
-                      <Clock className="h-4 w-4 text-secondary" />
-                      <span>{event.time}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-foreground">
-                      <MapPin className="h-4 w-4 text-secondary" />
-                      <span>{event.location}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-foreground">
-                      <Users className="h-4 w-4 text-secondary" />
-                      <span>{event.capacity}</span>
-                    </div>
-                  </div>
-                  <Button className="w-full bg-secondary hover:bg-secondary/90">
-                    Register Now
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -323,39 +226,6 @@ const Events = () => {
                       onDeleted={fetchEvents}
                     />
                   )}
-                </CardContent>
-              </Card>
-            ))}
-            
-            {/* Past Static Events */}
-            {pastEvents.map((event, index) => (
-              <Card key={index} className="border-border">
-                <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div className="space-y-2 flex-1">
-                      <h3 className="text-xl font-heading font-semibold text-primary">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm">
-                        {event.description}
-                      </p>
-                      <div className="flex items-center space-x-4 text-sm">
-                        <div className="flex items-center space-x-1 text-foreground">
-                          <Calendar className="h-4 w-4 text-secondary" />
-                          <span>{event.date}</span>
-                        </div>
-                        {event.attendees && (
-                          <div className="flex items-center space-x-1 text-foreground">
-                            <Users className="h-4 w-4 text-secondary" />
-                            <span>{event.attendees}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <Badge variant="outline" className="w-fit">
-                      Completed
-                    </Badge>
-                  </div>
                 </CardContent>
               </Card>
             ))}
