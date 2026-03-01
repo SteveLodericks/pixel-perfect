@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Clock, ArrowRight } from "lucide-react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { parse, isPast } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
+import EventAdminControls from "@/components/events/EventAdminControls";
 
 
 interface PublicEvent {
@@ -23,33 +25,28 @@ interface PublicEvent {
 }
 
 const Events = () => {
+  const { isAdmin } = useAdminCheck();
   const [eventbriteEvents, setEventbriteEvents] = useState<PublicEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Fetch events using secure function (excludes created_by for privacy)
-    const fetchEvents = async () => {
-      try {
-        const { data, error } = await supabase.rpc("get_public_events");
-
-        if (error) {
-          if (import.meta.env.DEV) {
-            console.error("Error fetching events:", error);
-          }
-        } else {
-          setEventbriteEvents(data || []);
-        }
-      } catch (error) {
-        if (import.meta.env.DEV) {
-          console.error("Error fetching events:", error);
-        }
-      } finally {
-        setIsLoading(false);
+  const fetchEvents = useCallback(async () => {
+    try {
+      const { data, error } = await supabase.rpc("get_public_events");
+      if (error) {
+        if (import.meta.env.DEV) console.error("Error fetching events:", error);
+      } else {
+        setEventbriteEvents(data || []);
       }
-    };
-
-    fetchEvents();
+    } catch (error) {
+      if (import.meta.env.DEV) console.error("Error fetching events:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
 
   const parseEventDateTime = (dateStr: string | null, timeStr: string | null) => {
@@ -224,6 +221,13 @@ const Events = () => {
                       Buy Tickets
                     </Button>
                   </a>
+                  {isAdmin && (
+                    <EventAdminControls
+                      event={event}
+                      onUpdated={fetchEvents}
+                      onDeleted={fetchEvents}
+                    />
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -312,6 +316,13 @@ const Events = () => {
                       Completed
                     </Badge>
                   </div>
+                  {isAdmin && (
+                    <EventAdminControls
+                      event={event}
+                      onUpdated={fetchEvents}
+                      onDeleted={fetchEvents}
+                    />
+                  )}
                 </CardContent>
               </Card>
             ))}
