@@ -21,20 +21,25 @@ const Auth = () => {
   const [isResettingPassword, setIsResettingPassword] = useState(false);
 
   useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
+    // Track whether this is a password recovery session to prevent auto-redirect
+    let isRecoveryFlow = false;
+
+    // Set up auth state listener BEFORE checking session
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        isRecoveryFlow = true;
+        setIsResettingPassword(true);
+        return;
+      }
+      if (event === 'SIGNED_IN' && session && !isRecoveryFlow) {
         navigate("/");
       }
     });
 
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+    // Check if user is already logged in (but not if arriving via recovery link)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session && !isRecoveryFlow && !isResettingPassword) {
         navigate("/");
-      }
-      if (event === 'PASSWORD_RECOVERY') {
-        setIsResettingPassword(true);
       }
     });
 
