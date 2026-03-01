@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 
 const Auth = () => {
@@ -19,6 +19,7 @@ const Auth = () => {
   const [resetEmail, setResetEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [isResettingPassword, setIsResettingPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   useEffect(() => {
     // Track whether this is a password recovery session to prevent auto-redirect
@@ -165,13 +166,13 @@ const Auth = () => {
         });
       } else {
         toast({
-          title: "Success",
-          description: "Password updated successfully! You are now logged in.",
+          title: "Password updated",
+          description: "Please sign in with your new password.",
         });
         setIsResettingPassword(false);
         setNewPassword("");
-        // User is already authenticated after password update, redirect to home
-        navigate("/");
+        // Sign out so user must log in with new credentials
+        await supabase.auth.signOut();
       }
     } catch (error) {
       toast({
@@ -210,15 +211,26 @@ const Auth = () => {
               <form onSubmit={handleUpdatePassword} className="space-y-4">
                 <div>
                   <Label htmlFor="new-password">New Password</Label>
-                  <Input
-                    id="new-password"
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                    disabled={loading}
-                    minLength={6}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="new-password"
+                      type={showNewPassword ? "text" : "password"}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                      disabled={loading}
+                      minLength={6}
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      tabIndex={-1}
+                    >
+                      {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
